@@ -1,9 +1,10 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Visit {
+public class Visit implements Serializable {
 
     @Id
     @GeneratedValue
@@ -20,6 +21,8 @@ public class Visit {
     @ManyToOne
     @JoinColumn(name = "vetId")
     private Veterinary veterinary;
+
+    public Visit(){}
 
     public Visit(int id, String createdAt, String type, String description, Pet pet, Veterinary veterinary) {
         this.id = id;

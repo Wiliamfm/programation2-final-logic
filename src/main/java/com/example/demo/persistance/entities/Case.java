@@ -1,9 +1,10 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Case {
+public class Case implements Serializable {
 
     @Id
     @GeneratedValue

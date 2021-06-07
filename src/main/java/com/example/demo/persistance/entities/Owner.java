@@ -13,6 +13,7 @@ public class Owner implements Serializable {
     @JoinColumn(name = "id")
     private UserApp userApp;
     @Column(unique = true)
+    @GeneratedValue
     private int personId;
     @Column
     private String name;

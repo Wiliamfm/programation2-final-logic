@@ -7,6 +7,12 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/PostgresDS</jta-data-source>
         <class>com.example.demo.persistance.entities.Owner</class>
+        <class>com.example.demo.persistance.entities.UserApp</class>
+        <class>com.example.demo.persistance.entities.Official</class>
+        <class>com.example.demo.persistance.entities.Veterinary</class>
+        <class>com.example.demo.persistance.entities.Pet</class>
+        <class>com.example.demo.persistance.entities.Case</class>
+        <class>com.example.demo.persistance.entities.Visit</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect" />

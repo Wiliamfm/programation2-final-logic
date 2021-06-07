@@ -1,11 +1,12 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class UserApp {
+public class UserApp implements Serializable {
 
     @Id
     private String username;

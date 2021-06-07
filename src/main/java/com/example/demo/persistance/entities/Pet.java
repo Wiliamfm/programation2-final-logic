@@ -1,11 +1,12 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Pet {
+public class Pet implements Serializable {
 
     @Id
     @GeneratedValue
