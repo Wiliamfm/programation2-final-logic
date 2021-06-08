@@ -9,7 +9,7 @@ import java.util.List;
 public class Owner implements Serializable {
 
     @Id
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id")
     private UserApp userApp;
     @Column(unique = true)

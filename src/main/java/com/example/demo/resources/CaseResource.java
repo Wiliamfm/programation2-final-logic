@@ -1,6 +1,6 @@
 package com.example.demo.resources;
 
-import com.example.demo.persistance.entities.Case;
+import com.example.demo.persistance.entities.PetCase;
 import com.example.demo.persistance.services.CaseService;
 
 import javax.ws.rs.*;
@@ -19,7 +19,7 @@ public class CaseResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Case cas) {
+    public Response create(PetCase cas) {
         if(caseService.create(cas)){
             return Response.status(Response.Status.CREATED).entity(cas).build();
         }else

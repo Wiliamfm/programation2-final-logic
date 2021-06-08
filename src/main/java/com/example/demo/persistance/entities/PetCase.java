@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Case implements Serializable {
+public class PetCase implements Serializable {
 
     @Id
     @GeneratedValue
@@ -19,9 +19,9 @@ public class Case implements Serializable {
     @JoinColumn(name = "petId")
     private Pet pet;
 
-    public Case(){}
+    public PetCase(){}
 
-    public Case(int id, String createdAt, String type, String description, Pet pet) {
+    public PetCase(int id, String createdAt, String type, String description, Pet pet) {
         this.id = id;
         this.createdAt = createdAt;
         this.type = type;

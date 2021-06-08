@@ -9,7 +9,7 @@ import java.util.List;
 public class Veterinary implements Serializable {
 
     @Id
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name= "id")
     private UserApp userApp;
     @Column

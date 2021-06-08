@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Official implements Serializable {
 
     @Id
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id")
     private UserApp userApp;
     @Column

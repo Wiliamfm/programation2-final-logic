@@ -28,8 +28,8 @@ public class Pet implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ownerId")
     private Owner owner;
-    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Case.class)
-    private List<Case> cases= new ArrayList<>();
+    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PetCase.class)
+    private List<PetCase> petCases = new ArrayList<>();
     @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Visit.class)
     private List<Visit> visits= new ArrayList<>();
 
@@ -57,9 +57,9 @@ public class Pet implements Serializable {
         this.owner = owner;
     }
 
-    public boolean addCase(Case cas){
+    public boolean addCase(PetCase cas){
         try{
-            cases.add(cas);
+            petCases.add(cas);
             return true;
         }catch (Exception e){
             return false;
@@ -147,12 +147,12 @@ public class Pet implements Serializable {
         this.owner = owner;
     }
 
-    public List<Case> getCases() {
-        return cases;
+    public List<PetCase> getCases() {
+        return petCases;
     }
 
-    public void setCases(List<Case> cases) {
-        this.cases = cases;
+    public void setCases(List<PetCase> petCases) {
+        this.petCases = petCases;
     }
 
     public List<Visit> getVisits() {

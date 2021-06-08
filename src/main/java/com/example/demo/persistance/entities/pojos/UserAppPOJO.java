@@ -1,6 +1,5 @@
 package com.example.demo.persistance.entities.pojos;
 
-import java.util.ArrayList;
 
 public class UserAppPOJO {
 
@@ -8,9 +7,9 @@ public class UserAppPOJO {
     private String password;
     private String email;
     private String role;
-    private ArrayList<OfficialPOJO> officialPOJOS= new ArrayList<>();
-    private ArrayList<OwnerPOJO> ownerPOJOS= new ArrayList<>();
-    private ArrayList<VeterinaryPOJO> veterinaryPOJOS= new ArrayList<>();
+    private OwnerPOJO ownerPOJO;
+    private OfficialPOJO officialPOJO;
+    private VeterinaryPOJO veterinaryPOJO;
 
     public UserAppPOJO(String username, String password, String email, String role) {
         this.username = username;
@@ -51,27 +50,27 @@ public class UserAppPOJO {
         this.role = role;
     }
 
-    public ArrayList<OfficialPOJO> getOfficialPOJOS() {
-        return officialPOJOS;
+    public OwnerPOJO getOwnerPOJO() {
+        return ownerPOJO;
     }
 
-    public void setOfficialPOJOS(ArrayList<OfficialPOJO> officialPOJOS) {
-        this.officialPOJOS = officialPOJOS;
+    public void setOwnerPOJO(OwnerPOJO ownerPOJO) {
+        this.ownerPOJO = ownerPOJO;
     }
 
-    public ArrayList<OwnerPOJO> getOwnerPOJOS() {
-        return ownerPOJOS;
+    public OfficialPOJO getOfficialPOJO() {
+        return officialPOJO;
     }
 
-    public void setOwnerPOJOS(ArrayList<OwnerPOJO> ownerPOJOS) {
-        this.ownerPOJOS = ownerPOJOS;
+    public void setOfficialPOJO(OfficialPOJO officialPOJO) {
+        this.officialPOJO = officialPOJO;
     }
 
-    public ArrayList<VeterinaryPOJO> getVeterinaryPOJOS() {
-        return veterinaryPOJOS;
+    public VeterinaryPOJO getVeterinaryPOJO() {
+        return veterinaryPOJO;
     }
 
-    public void setVeterinaryPOJOS(ArrayList<VeterinaryPOJO> veterinaryPOJOS) {
-        this.veterinaryPOJOS = veterinaryPOJOS;
+    public void setVeterinaryPOJO(VeterinaryPOJO veterinaryPOJO) {
+        this.veterinaryPOJO = veterinaryPOJO;
     }
 }

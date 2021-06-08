@@ -1,6 +1,6 @@
 package com.example.demo.persistance.services;
 
-import com.example.demo.persistance.entities.Case;
+import com.example.demo.persistance.entities.PetCase;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +16,7 @@ public class CaseService {
         entityManager= entityManagerFactory.createEntityManager();
     }
 
-    public boolean create(Case cas){
+    public boolean create(PetCase cas){
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(cas);

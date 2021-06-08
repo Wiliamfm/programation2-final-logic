@@ -41,6 +41,23 @@ public class UserAppService {
         }
     }
 
+    public String validateUser(String username, String password){
+        try{
+            UserApp userApp= entityManager.find(UserApp.class, username);
+            if(userApp!=null){
+                if(userApp.getUsername().equals(username) && userApp.getPassword().equals(password)){
+                    return userApp.getRole();
+                }else{
+                    return "no match";
+                }
+            }else{
+                return "not found";
+            }
+        }catch (Exception e){
+            return "error";
+        }
+    }
+
     public void close(){
         entityManager.close();
         entityManagerFactory.close();

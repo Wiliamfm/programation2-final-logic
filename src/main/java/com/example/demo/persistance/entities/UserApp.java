@@ -16,12 +16,12 @@ public class UserApp implements Serializable {
     private String email;
     @Column
     private String role;
-    @OneToMany(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Owner.class)
-    private List<Owner> ownerArrayList= new ArrayList<>();
-    @OneToMany(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Official.class)
-    private List<Official> officialArrayList= new ArrayList<>();
-    @OneToMany(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Veterinary.class)
-    private List<Veterinary> veterinaryArrayList= new ArrayList<>();
+    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Owner owner= new Owner();
+    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Official official= new Official();
+    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Veterinary veterinary= new Veterinary();
 
     public UserApp(){}
 
@@ -30,33 +30,6 @@ public class UserApp implements Serializable {
         this.password = password;
         this.email = email;
         this.role = role;
-    }
-
-    public boolean addOwner(Owner owner){
-        try {
-            ownerArrayList.add(owner);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-
-    public boolean addOfficial(Official official){
-        try {
-            officialArrayList.add(official);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-
-    public boolean addVeterinary(Veterinary veterinary){
-        try {
-            veterinaryArrayList.add(veterinary);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
     }
 
     public String getUsername() {
@@ -91,27 +64,27 @@ public class UserApp implements Serializable {
         this.role = role;
     }
 
-    public List<Owner> getOwnerArrayList() {
-        return ownerArrayList;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwnerArrayList(ArrayList<Owner> ownerArrayList) {
-        this.ownerArrayList = ownerArrayList;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
-    public List<Official> getOfficialArrayList() {
-        return officialArrayList;
+    public Official getOfficial() {
+        return official;
     }
 
-    public void setOfficialArrayList(ArrayList<Official> officialArrayList) {
-        this.officialArrayList = officialArrayList;
+    public void setOfficial(Official official) {
+        this.official = official;
     }
 
-    public List<Veterinary> getVeterinaryArrayList() {
-        return veterinaryArrayList;
+    public Veterinary getVeterinary() {
+        return veterinary;
     }
 
-    public void setVeterinaryArrayList(ArrayList<Veterinary> veterinaryArrayList) {
-        this.veterinaryArrayList = veterinaryArrayList;
+    public void setVeterinary(Veterinary veterinary) {
+        this.veterinary = veterinary;
     }
 }
