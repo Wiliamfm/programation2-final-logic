@@ -11,7 +11,7 @@
         <class>com.example.demo.persistance.entities.Official</class>
         <class>com.example.demo.persistance.entities.Veterinary</class>
         <class>com.example.demo.persistance.entities.Pet</class>
-        <class>com.example.demo.persistance.entities.Case</class>
+        <class>com.example.demo.persistance.entities.PetCase</class>
         <class>com.example.demo.persistance.entities.Visit</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update" />

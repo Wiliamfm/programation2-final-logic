@@ -38,7 +38,7 @@ public class SecurityFilter implements ContainerRequestFilter {
                 // Validating credentials
                 UserAppService userAppService= new UserAppService();
                 String role = userAppService.validateUser(username, password);
-                if(!(role.equals("error") && role.equals("not found") && role.equals("no match"))) {
+                if(!(role.equals("error") || role.equals("not found") || role.equals("no match"))) {
                     requestContext.getHeaders().add("role", role);
                     userAppService.close();
                     return;
