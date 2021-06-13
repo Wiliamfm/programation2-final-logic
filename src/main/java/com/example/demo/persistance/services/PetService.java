@@ -32,7 +32,11 @@ public class PetService {
             List<PetPOJO> petPOJOS= new ArrayList<>();
             for (Pet pet :
                     petList) {
-                petPOJOS.add(new PetPOJO(pet.getId(), pet.getMicroship(), pet.getName(), pet.getSpecie(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), pet.getOwner().getUsername()));
+                String micro= pet.getMicroship();
+                if(micro==null){
+                    micro= "No registra";
+                }
+                petPOJOS.add(new PetPOJO(pet.getId(), micro, pet.getName(), pet.getSpecie(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), pet.getOwner().getUsername()));
             }
             close();
             return petPOJOS;
@@ -66,6 +70,32 @@ public class PetService {
         }catch (Exception e){
             System.out.println("Error while creating Pet: " +e.getMessage());
             close();
+            return false;
+        }
+    }
+
+    public boolean modify(int petId, String name, String microship, String specie, String race, String size, String sex, String picture){
+        try{
+            Pet pet= entityManager.find(Pet.class, petId);
+            if( pet!=null){
+                entityManager.getTransaction().begin();
+                pet.setName(name);
+                pet.setMicroship(microship);
+                pet.setSpecie(specie);
+                pet.setRace(race);
+                pet.setSize(size);
+                pet.setSex(sex);
+                pet.setPicture(picture);
+                entityManager.getTransaction().commit();
+                close();
+                return true;
+            }else{
+                close();
+                return false;
+            }
+        }catch (Exception e){
+            close();
+            e.printStackTrace();
             return false;
         }
     }

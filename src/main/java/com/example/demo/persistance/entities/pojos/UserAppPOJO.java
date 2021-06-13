@@ -7,9 +7,6 @@ public class UserAppPOJO {
     private String password;
     private String email;
     private String role;
-    private OwnerPOJO ownerPOJO;
-    private OfficialPOJO officialPOJO;
-    private VeterinaryPOJO veterinaryPOJO;
 
     public UserAppPOJO(String username, String password, String email, String role) {
         this.username = username;
@@ -48,29 +45,5 @@ public class UserAppPOJO {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public OwnerPOJO getOwnerPOJO() {
-        return ownerPOJO;
-    }
-
-    public void setOwnerPOJO(OwnerPOJO ownerPOJO) {
-        this.ownerPOJO = ownerPOJO;
-    }
-
-    public OfficialPOJO getOfficialPOJO() {
-        return officialPOJO;
-    }
-
-    public void setOfficialPOJO(OfficialPOJO officialPOJO) {
-        this.officialPOJO = officialPOJO;
-    }
-
-    public VeterinaryPOJO getVeterinaryPOJO() {
-        return veterinaryPOJO;
-    }
-
-    public void setVeterinaryPOJO(VeterinaryPOJO veterinaryPOJO) {
-        this.veterinaryPOJO = veterinaryPOJO;
     }
 }

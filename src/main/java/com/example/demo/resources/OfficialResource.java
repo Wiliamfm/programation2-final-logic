@@ -1,10 +1,8 @@
 package com.example.demo.resources;
 
 import com.example.demo.persistance.entities.Official;
-import com.example.demo.persistance.entities.UserApp;
 import com.example.demo.persistance.entities.pojos.OfficialPOJO;
 import com.example.demo.persistance.services.OfficialService;
-import com.example.demo.persistance.services.UserAppService;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -24,9 +22,19 @@ public class OfficialResource {
     }
 
     @GET
-    @Produces("text/plain")
-    public String hello() {
-        return "Hello, World!";
+    @Path("/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOfficial(@PathParam("username") String username) {
+        try{
+            OfficialPOJO officialPOJO= officialService.getOfficial(username);
+            if(officialPOJO!=null){
+                return Response.status(Response.Status.OK).entity(officialPOJO).header("Access-Control-Allow-Origin", "*").build();
+            }else{
+                return Response.status(Response.Status.NOT_FOUND).entity(false).header("Access-Control-Allow-Origin", "*").build();
+            }
+        }catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error").header("Access-Control-Allow-Origin", "*").build();
+        }
     }
 
     /**

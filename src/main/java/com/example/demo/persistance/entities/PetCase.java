@@ -10,7 +10,7 @@ public class PetCase {
     @GeneratedValue
     private int id;
     @Column
-    private Date createdAt;
+    private String createdAt;
     @Column
     private String type;
     @Column
@@ -22,7 +22,7 @@ public class PetCase {
     public PetCase() {
     }
 
-    public PetCase(Date createdAt, String type, String description) {
+    public PetCase(String createdAt, String type, String description) {
         this.createdAt = createdAt;
         this.type = type;
         this.description = description;
@@ -36,11 +36,11 @@ public class PetCase {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

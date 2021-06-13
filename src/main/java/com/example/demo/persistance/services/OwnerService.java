@@ -1,8 +1,10 @@
 package com.example.demo.persistance.services;
 
 import com.example.demo.persistance.entities.Owner;
+import com.example.demo.persistance.entities.Pet;
 import com.example.demo.persistance.entities.UserApp;
 import com.example.demo.persistance.entities.pojos.OwnerPOJO;
+import com.example.demo.persistance.entities.pojos.PetPOJO;
 import com.example.demo.persistance.repositories.OwnerRepository;
 
 import javax.persistence.EntityManager;
@@ -31,9 +33,25 @@ public class OwnerService {
 
     }
 
-    public Owner getOwner(String username){
+    /**
+     * get an owner.
+     * @param username id of the owner.
+     * @return the owner in a pojo.
+     */
+    public OwnerPOJO getOwner(String username){
         try{
-            return entityManager.find(Owner.class, username);
+            Owner owner= entityManager.find(Owner.class, username);
+            if(owner!=null){
+                OwnerPOJO ownerPOJO= new OwnerPOJO(owner.getUsername(), owner.getPassword(), owner.getEmail(), owner.getRole(), owner.getPersonId(), owner.getName(), owner.getAddress(), owner.getNeighborhood());
+                for (Pet pet : owner.getPetArrayList()) {
+                    ownerPOJO.getPetPOJOS().add(new PetPOJO(pet.getId(), pet.getMicroship(), pet.getName(), pet.getSpecie(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), pet.getOwner().getUsername()));
+                }
+                close();
+                return ownerPOJO;
+            }else {
+                close();
+                return null;
+            }
         }catch (Exception e){
             close();
             System.out.println("Error getting owner: " +e.getMessage());

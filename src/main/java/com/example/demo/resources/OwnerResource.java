@@ -2,10 +2,8 @@ package com.example.demo.resources;
 
 import com.example.demo.filter.Logged;
 import com.example.demo.persistance.entities.Owner;
-import com.example.demo.persistance.entities.UserApp;
 import com.example.demo.persistance.entities.pojos.OwnerPOJO;
 import com.example.demo.persistance.services.OwnerService;
-import com.example.demo.persistance.services.UserAppService;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -31,10 +29,20 @@ public class OwnerResource {
      * @return 200 if owner found, some 4** status in other cases.
      */
     @GET
+    @Path("/{username}")
     //@Logged
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listOwner(@PathParam("userName") String userName){//@HeaderParam("role") String role){
-        return null;
+    public Response getOwner(@PathParam("username") String userName){//@HeaderParam("role") String role){
+        try{
+            OwnerPOJO ownerPOJO= ownerService.getOwner(userName);
+            if(ownerPOJO!=null){
+                return Response.status(Response.Status.OK).entity(ownerPOJO).header("Access-Control-Allow-Origin", "*").build();
+            }else{
+                return Response.status(Response.Status.NOT_FOUND).entity(false).header("Access-Control-Allow-Origin", "*").build();
+            }
+        }catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error").header("Access-Control-Allow-Origin", "*").build();
+        }
     }
 
     /**
@@ -61,7 +69,7 @@ public class OwnerResource {
                     OwnerPOJO ownerPOJO= new OwnerPOJO(username, password, email, owner.getRole(), owner.getPersonId(), name, address, neighborhood);
                     return Response.status(Response.Status.CREATED).entity(ownerPOJO).header("Access-Control-Allow-Origin", "*").build();
                 }else{
-                    return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Not create").header("Access-Control-Allow-Origin", "*").build();
+                    return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).header("Access-Control-Allow-Origin", "*").build();
                 }
             }catch(IOException e){
                 return Response.status(Response.Status.BAD_REQUEST).entity("Error in the form").header("Access-Control-Allow-Origin", "*").build();
@@ -80,16 +88,15 @@ public class OwnerResource {
      * @return 200 status if modify successful, 4** other case.
      */
     @POST
-    @Path("/modify")
+    @Path("/{username}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response modify(MultipartFormDataInput input){
+    public Response modify(@PathParam("username") String username, MultipartFormDataInput input){
         try{
             Map<String, List<InputPart>> uploadForm= input.getFormDataMap();
             String address= uploadForm.get("form-address").get(0).getBodyAsString();
             String neighborhood= uploadForm.get("form-neighborhood").get(0).getBodyAsString();
-            String userName= uploadForm.get("form-username").get(0).getBodyAsString();
-            if(ownerService.modify(userName, address, neighborhood)){
+            if(ownerService.modify(username, address, neighborhood)){
                 return Response.status(Response.Status.OK).entity(true).header("Access-Control-Allow-Origin", "*").build();
             }else{
                 return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).header("Access-Control-Allow-Origin", "*").build();

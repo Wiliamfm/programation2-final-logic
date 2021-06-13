@@ -2,6 +2,9 @@ package com.example.demo.persistance.services;
 
 import com.example.demo.persistance.entities.UserApp;
 import com.example.demo.persistance.entities.Veterinary;
+import com.example.demo.persistance.entities.Visit;
+import com.example.demo.persistance.entities.pojos.VeterinaryPOJO;
+import com.example.demo.persistance.entities.pojos.VisitPOJO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +18,24 @@ public class VeterinaryService {
     public VeterinaryService(){
         entityManagerFactory= Persistence.createEntityManagerFactory("db");
         entityManager= entityManagerFactory.createEntityManager();
+    }
+
+    public VeterinaryPOJO getVet(String username){
+        try{
+            Veterinary veterinary= entityManager.find(Veterinary.class, username);
+            if(veterinary!=null){
+                VeterinaryPOJO veterinaryPOJO= new VeterinaryPOJO(veterinary.getUsername(), veterinary.getPassword(), veterinary.getEmail(), veterinary.getRole(), veterinary.getName(), veterinary.getAddress(), veterinary.getNeighborhood());
+                close();
+                return veterinaryPOJO;
+            }else {
+                close();
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            close();
+            return null;
+        }
     }
 
     /**

@@ -13,6 +13,7 @@ public class OwnerPOJO {
     private String address;
     private String neighborhood;
     private ArrayList<PetPOJO> petPOJOS= new ArrayList<>();
+    private int totalPets;
 
     public OwnerPOJO(String username, String password, String email, String role, int personId, String name, String address, String neighborhood) {
         this.username = username;
@@ -99,5 +100,13 @@ public class OwnerPOJO {
 
     public void setPetPOJOS(ArrayList<PetPOJO> petPOJOS) {
         this.petPOJOS = petPOJOS;
+    }
+
+    public int getTotalPets() {
+        return totalPets;
+    }
+
+    public void setTotalPets(int totalPets) {
+        this.totalPets = totalPets;
     }
 }

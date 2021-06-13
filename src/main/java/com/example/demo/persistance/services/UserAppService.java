@@ -1,10 +1,17 @@
 package com.example.demo.persistance.services;
 
+import com.example.demo.persistance.entities.Owner;
+import com.example.demo.persistance.entities.Pet;
+import com.example.demo.persistance.entities.PetCase;
 import com.example.demo.persistance.entities.UserApp;
+import com.example.demo.persistance.entities.pojos.CasePOJO;
+import com.example.demo.persistance.entities.pojos.OwnerPOJO;
+import com.example.demo.persistance.entities.pojos.PetPOJO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAppService {
@@ -15,46 +22,6 @@ public class UserAppService {
     public UserAppService(){
         entityManagerFactory= Persistence.createEntityManagerFactory("db");
         entityManager= entityManagerFactory.createEntityManager();
-    }
-
-    public List<UserApp> listUsers(){
-        try{
-            entityManager.getTransaction().begin();
-            List<UserApp> userApps= entityManager.createQuery("from UserApp").getResultList();
-            return userApps;
-        }catch (Exception e){
-            System.out.println("Error while listing users: " +e.getMessage());
-            return null;
-        }
-
-    }
-
-    public UserApp getUserApp(String userName){
-        try{
-            return entityManager.find(UserApp.class, userName);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public boolean create(UserApp userApp){
-        try{
-            if(userApp.getRole().equals("owner")||userApp.getRole().equals("official")||userApp.getRole().equals("veterinary")){
-                entityManager.getTransaction().begin();
-                entityManager.persist(userApp);
-                entityManager.getTransaction().commit();
-                close();
-                return true;
-            }else{
-                close();
-                return false;
-            }
-        }catch (Exception e){
-            System.out.println("Error while creating user: " +e.getMessage());
-            close();
-            return false;
-        }
     }
 
     public UserApp validateUser(String username, String password){
@@ -68,6 +35,72 @@ public class UserAppService {
                     close();
                     return null;
                 }
+            }else{
+                close();
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            close();
+            return null;
+        }
+    }
+
+    public List<PetPOJO> getPets(){
+        try{
+            List<Pet> pets= entityManager.createQuery("from Pet").getResultList();
+            if(pets!=null){
+                List<PetPOJO> petPOJOS= new ArrayList<>();
+                for (Pet pet: pets) {
+                    petPOJOS.add(new PetPOJO(pet.getId(), pet.getMicroship(), pet.getName(), pet.getSpecie(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), pet.getOwner().getUsername()));
+                }
+                close();
+                return petPOJOS;
+            }else{
+                close();
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            close();
+            return null;
+        }
+    }
+
+    public List<OwnerPOJO> getOwners(){
+        try{
+            List<Owner> owners= entityManager.createQuery("from Owner").getResultList();
+            if(owners!=null){
+                List<OwnerPOJO> ownerPOJOS= new ArrayList<>();
+                for (Owner owner: owners) {
+                    int totalPets= owner.getPetArrayList().size();
+                    OwnerPOJO ownerPOJO=new OwnerPOJO(owner.getUsername(), owner.getPassword(), owner.getEmail(), owner.getRole(), owner.getPersonId(), owner.getName(), owner.getAddress(), owner.getNeighborhood());
+                    ownerPOJO.setTotalPets(totalPets);
+                    ownerPOJOS.add(ownerPOJO);
+                }
+                close();
+                return ownerPOJOS;
+            }else{
+                close();
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            close();
+            return null;
+        }
+    }
+
+    public List<CasePOJO> getCases(){
+        try{
+            List<PetCase> petCase= entityManager.createQuery("from PetCase ").getResultList();
+            if(petCase!=null){
+                List<CasePOJO> casePOJOS= new ArrayList<>();
+                for (PetCase petCase1: petCase) {
+                    casePOJOS.add(new CasePOJO(petCase1.getId(), petCase1.getCreatedAt(), petCase1.getType(), petCase1.getDescription(), petCase1.getPet().getId()));
+                }
+                close();
+                return casePOJOS;
             }else{
                 close();
                 return null;

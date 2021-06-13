@@ -25,8 +25,13 @@ public class Veterinary extends UserApp {
         this.neighborhood = neighborhood;
     }
 
-    public boolean addVisit(Visit visit){
-        return false;
+    public void addVisit(Visit visit){
+        try{
+            visits.add(visit);
+            visit.setVeterinary(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getName() {

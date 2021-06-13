@@ -9,6 +9,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class CaseResource {
             int pet= Integer.parseInt(petId);
             String type= uploadForm.get("form-type").get(0).getBodyAsString();
             String description= uploadForm.get("form-description").get(0).getBodyAsString();
-            PetCase petCase= new PetCase(java.util.GregorianCalendar.getInstance().getTime(), type, description);
+            PetCase petCase= new PetCase(new Date().toString(), type, description);
             if(caseService.create(pet, petCase)){
                 CasePOJO casePOJO= new CasePOJO(petCase.getId(), petCase.getCreatedAt(), petCase.getType(), petCase.getDescription(), pet);
                 return Response.status(Response.Status.CREATED).entity(casePOJO).header("Access-Control-Allow-Origin", "*").build();
@@ -42,7 +43,6 @@ public class CaseResource {
             e.printStackTrace();
             caseService.close();
             return Response.status(Response.Status.BAD_REQUEST).entity("error").header("Access-Control-Allow-Origin", "*").build();
-
         }
     }
 }

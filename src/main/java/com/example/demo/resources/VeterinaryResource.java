@@ -1,10 +1,7 @@
 package com.example.demo.resources;
 
-import com.example.demo.persistance.entities.Owner;
-import com.example.demo.persistance.entities.UserApp;
 import com.example.demo.persistance.entities.Veterinary;
 import com.example.demo.persistance.entities.pojos.VeterinaryPOJO;
-import com.example.demo.persistance.services.UserAppService;
 import com.example.demo.persistance.services.VeterinaryService;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -22,6 +19,22 @@ public class VeterinaryResource {
 
     public VeterinaryResource(){
         veterinaryService= new VeterinaryService();
+    }
+
+    @GET
+    @Path("/{vetId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVet(@PathParam("vetId") String vetId){
+        try{
+            VeterinaryPOJO veterinaryPOJO= veterinaryService.getVet(vetId);
+            if(veterinaryPOJO!=null){
+                return Response.status(Response.Status.OK).entity(veterinaryPOJO).header("Access-Control-Allow-Origin", "*").build();
+            }else {
+                return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).header("Access-Control-Allow-Origin", "*").build();
+            }
+        }catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("error").header("Access-Control-Allow-Origin", "*").build();
+        }
     }
 
     /**
@@ -61,13 +74,12 @@ public class VeterinaryResource {
      * @return true if modify, false other way.
      */
     @POST
-    @Path("/modify")
+    @Path("/{username}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response modify(MultipartFormDataInput input) {
+    public Response modify(@PathParam("username") String username, MultipartFormDataInput input) {
         try {
             Map<String, List<InputPart>> uploadForm= input.getFormDataMap();
-            String username= uploadForm.get("form-username").get(0).getBodyAsString();
             String address= uploadForm.get("form-address").get(0).getBodyAsString();
             String neighborhood= uploadForm.get("form-neighborhood").get(0).getBodyAsString();
             if(veterinaryService.modify(username,address,neighborhood)){

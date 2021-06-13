@@ -76,4 +76,38 @@ public class PetResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("error").header("Access-Control-Allow-Origin", "*").build();
         }
     }
+
+    /**
+     * modify a pet info.
+     * @param petId the id of the pet.
+     * @param input fields of the pet.
+     * @return status 200 if modify, 4** other cases.
+     */
+    @POST
+    @Path("/{petId}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response modify(@PathParam("petId") int petId, MultipartFormDataInput input) {
+        try{
+            Map<String, List<InputPart>> uploadForm= input.getFormDataMap();
+            String microship= uploadForm.get("form-microship").get(0).getBodyAsString();
+            String name= uploadForm.get("form-name").get(0).getBodyAsString();
+            String specie= uploadForm.get("form-specie").get(0).getBodyAsString();
+            String race= uploadForm.get("form-race").get(0).getBodyAsString();
+            String size= uploadForm.get("form-size").get(0).getBodyAsString();
+            String sex= uploadForm.get("form-sex").get(0).getBodyAsString();
+            String picture= uploadForm.get("form-picture").get(0).getBodyAsString();
+            if(microship.equals("")){
+                microship=null;
+            }
+            if(petService.modify(petId, name, microship, specie, race, size, sex, picture)){
+                return Response.status(Response.Status.OK).entity(true).header("Access-Control-Allow-Origin", "*").build();
+            }else{
+                return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).header("Access-Control-Allow-Origin", "*").build();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).entity("error").header("Access-Control-Allow-Origin", "*").build();
+        }
+    }
 }

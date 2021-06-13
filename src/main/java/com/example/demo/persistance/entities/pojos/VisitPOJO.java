@@ -1,15 +1,17 @@
 package com.example.demo.persistance.entities.pojos;
 
+import java.util.Date;
+
 public class VisitPOJO {
 
     private int id;
     private String createdAt;
     private String type;
     private String description;
-    private int vetId;
+    private String vetId;
     private int petId;
 
-    public VisitPOJO(int id, String createdAt, String type, String description, int vetId, int petId) {
+    public VisitPOJO(int id, String createdAt, String type, String description, String vetId, int petId) {
         this.id = id;
         this.createdAt = createdAt;
         this.type = type;
@@ -50,11 +52,11 @@ public class VisitPOJO {
         this.description = description;
     }
 
-    public int getVetId() {
+    public String getVetId() {
         return vetId;
     }
 
-    public void setVetId(int vetId) {
+    public void setVetId(String vetId) {
         this.vetId = vetId;
     }
 

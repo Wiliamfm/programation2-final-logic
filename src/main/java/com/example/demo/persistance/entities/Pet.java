@@ -31,8 +31,8 @@ public class Pet {
 
     @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PetCase.class)
     private List<PetCase> petCases = new ArrayList<>();
-    /*@OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Visit.class)
-    private List<Visit> visits= new ArrayList<>();*/
+    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Visit.class)
+    private List<Visit> visits = new ArrayList<>();
 
     public Pet() {
     }
@@ -47,10 +47,19 @@ public class Pet {
         this.picture = picture;
     }
 
-    public void addCase(PetCase petCase){
-        try{
+    public void addCase(PetCase petCase) {
+        try {
             petCases.add(petCase);
             petCase.setPet(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addVisit(Visit visit){
+        try{
+            visits.add(visit);
+            visit.setPet(this);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -126,5 +135,21 @@ public class Pet {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public List<PetCase> getPetCases() {
+        return petCases;
+    }
+
+    public void setPetCases(List<PetCase> petCases) {
+        this.petCases = petCases;
+    }
+
+    public List<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
     }
 }
