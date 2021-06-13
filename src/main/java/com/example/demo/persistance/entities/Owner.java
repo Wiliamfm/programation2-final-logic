@@ -1,19 +1,15 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.xml.registry.infomodel.User;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Owner implements Serializable {
+public class Owner extends UserApp{
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id")
-    private UserApp userApp;
-    @Column(unique = true)
-    @GeneratedValue
+    @Column(unique = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int personId;
     @Column
     private String name;
@@ -21,26 +17,16 @@ public class Owner implements Serializable {
     private String address;
     @Column
     private String neighborhood;
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Pet> petArrayList= new ArrayList<>();
 
     public Owner(){}
 
-    public Owner(UserApp userApp, int personId, String name, String address, String neighborhood) {
-        this.userApp = userApp;
-        this.personId = personId;
+    public Owner(String username, String password, String email, String name, String address, String neighborhood) {
+        super(username, password, email, "owner");
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
-    }
-
-    public Owner(UserApp userApp, int personId, String name, String address, String neighborhood, ArrayList<Pet> petArrayList) {
-        this.userApp = userApp;
-        this.personId = personId;
-        this.name = name;
-        this.address = address;
-        this.neighborhood = neighborhood;
-        this.petArrayList = petArrayList;
     }
 
     public boolean addPet(Pet pet){
@@ -51,14 +37,6 @@ public class Owner implements Serializable {
         }catch (Exception e){
             return false;
         }
-    }
-
-    public UserApp getUserApp() {
-        return userApp;
-    }
-
-    public void setUserApp(UserApp userApp) {
-        this.userApp = userApp;
     }
 
     public int getPersonId() {
@@ -97,7 +75,8 @@ public class Owner implements Serializable {
         return petArrayList;
     }
 
-    public void setPetArrayList(ArrayList<Pet> petArrayList) {
+    public void setPetArrayList(List<Pet> petArrayList) {
         this.petArrayList = petArrayList;
     }
+
 }

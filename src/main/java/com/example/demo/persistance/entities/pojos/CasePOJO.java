@@ -1,14 +1,16 @@
 package com.example.demo.persistance.entities.pojos;
 
+import java.util.Date;
+
 public class CasePOJO {
 
     private int id;
-    private String createdAt;
+    private Date createdAt;
     private String type;
     private String description;
     private int petId;
 
-    public CasePOJO(int id, String createdAt, String type, String description, int petId) {
+    public CasePOJO(int id, Date createdAt, String type, String description, int petId) {
         this.id = id;
         this.createdAt = createdAt;
         this.type = type;
@@ -24,11 +26,11 @@ public class CasePOJO {
         this.id = id;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

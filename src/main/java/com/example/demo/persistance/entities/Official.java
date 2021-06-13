@@ -1,31 +1,18 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Official implements Serializable {
+public class Official extends UserApp {
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id")
-    private UserApp userApp;
     @Column
     private String name;
 
     public Official() {}
 
-    public Official(UserApp userApp, String name) {
-        this.userApp = userApp;
+    public Official(String username, String password, String email, String name) {
+        super(username, password, email, "official");
         this.name = name;
-    }
-
-    public UserApp getUserApp() {
-        return userApp;
-    }
-
-    public void setUserApp(UserApp userApp) {
-        this.userApp = userApp;
     }
 
     public String getName() {

@@ -29,32 +29,53 @@ public class UserAppService {
 
     }
 
+    public UserApp getUserApp(String userName){
+        try{
+            return entityManager.find(UserApp.class, userName);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public boolean create(UserApp userApp){
         try{
-            entityManager.getTransaction().begin();
-            entityManager.persist(userApp);
-            entityManager.getTransaction().commit();
-            return true;
+            if(userApp.getRole().equals("owner")||userApp.getRole().equals("official")||userApp.getRole().equals("veterinary")){
+                entityManager.getTransaction().begin();
+                entityManager.persist(userApp);
+                entityManager.getTransaction().commit();
+                close();
+                return true;
+            }else{
+                close();
+                return false;
+            }
         }catch (Exception e){
             System.out.println("Error while creating user: " +e.getMessage());
+            close();
             return false;
         }
     }
 
-    public String validateUser(String username, String password){
+    public UserApp validateUser(String username, String password){
         try{
             UserApp userApp= entityManager.find(UserApp.class, username);
             if(userApp!=null){
                 if(userApp.getUsername().equals(username) && userApp.getPassword().equals(password)){
-                    return userApp.getRole();
+                    close();
+                    return userApp;
                 }else{
-                    return "no match";
+                    close();
+                    return null;
                 }
             }else{
-                return "not found";
+                close();
+                return null;
             }
         }catch (Exception e){
-            return "error";
+            e.printStackTrace();
+            close();
+            return null;
         }
     }
 

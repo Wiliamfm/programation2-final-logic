@@ -1,32 +1,31 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-public class PetCase implements Serializable {
+public class PetCase {
 
     @Id
     @GeneratedValue
     private int id;
     @Column
-    private String createdAt;
+    private Date createdAt;
     @Column
     private String type;
     @Column
     private String description;
     @ManyToOne
-    @JoinColumn(name = "petId")
+    @JoinColumn
     private Pet pet;
 
-    public PetCase(){}
+    public PetCase() {
+    }
 
-    public PetCase(int id, String createdAt, String type, String description, Pet pet) {
-        this.id = id;
+    public PetCase(Date createdAt, String type, String description) {
         this.createdAt = createdAt;
         this.type = type;
         this.description = description;
-        this.pet = pet;
     }
 
     public int getId() {
@@ -37,11 +36,11 @@ public class PetCase implements Serializable {
         this.id = id;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

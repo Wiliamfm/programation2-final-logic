@@ -4,31 +4,61 @@ import java.util.ArrayList;
 
 public class OwnerPOJO {
 
-    private String id;
+    private String username;
+    private String password;
+    private String email;
+    private String role;
     private int personId;
     private String name;
-    private String addres;
+    private String address;
     private String neighborhood;
-    private ArrayList<PetPOJO> petPOJOS= new ArrayList<PetPOJO>();
+    private ArrayList<PetPOJO> petPOJOS= new ArrayList<>();
 
-    public OwnerPOJO(String id, int personId, String name, String addres, String neighborhood) {
-        this.id = id;
+    public OwnerPOJO(String username, String password, String email, String role, int personId, String name, String address, String neighborhood) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
         this.personId = personId;
         this.name = name;
-        this.addres = addres;
+        this.address = address;
         this.neighborhood = neighborhood;
     }
 
-    public void addPet(PetPOJO petPOJO){
-        petPOJOS.add(petPOJO);
+    public void setPetPOJOS(){
+
     }
 
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getPersonId() {
@@ -47,12 +77,12 @@ public class OwnerPOJO {
         this.name = name;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getNeighborhood() {

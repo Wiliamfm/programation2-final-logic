@@ -1,12 +1,10 @@
 package com.example.demo.persistance.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class UserApp implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class UserApp{
 
     @Id
     private String username;
@@ -16,12 +14,6 @@ public class UserApp implements Serializable {
     private String email;
     @Column
     private String role;
-    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Owner owner= new Owner();
-    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Official official= new Official();
-    @OneToOne(mappedBy = "userApp", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Veterinary veterinary= new Veterinary();
 
     public UserApp(){}
 
@@ -62,29 +54,5 @@ public class UserApp implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    public Official getOfficial() {
-        return official;
-    }
-
-    public void setOfficial(Official official) {
-        this.official = official;
-    }
-
-    public Veterinary getVeterinary() {
-        return veterinary;
-    }
-
-    public void setVeterinary(Veterinary veterinary) {
-        this.veterinary = veterinary;
     }
 }

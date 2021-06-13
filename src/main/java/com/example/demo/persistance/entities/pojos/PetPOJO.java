@@ -13,11 +13,11 @@ public class PetPOJO {
     private String size;
     private String sex;
     private String picture;
-    private int ownerId;
+    private String ownerId;
     private ArrayList<CasePOJO> casePOJOS= new ArrayList<>();
     private ArrayList<VisitPOJO> visitPOJOS= new ArrayList<>();
 
-    public PetPOJO(int id, String microship, String name, String specie, String race, String size, String sex, String picture, int ownerId) {
+    public PetPOJO(int id, String microship, String name, String specie, String race, String size, String sex, String picture, String ownerId) {
         this.id = id;
         this.microship = microship;
         this.name = name;
@@ -93,11 +93,11 @@ public class PetPOJO {
         this.picture = picture;
     }
 
-    public int getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 

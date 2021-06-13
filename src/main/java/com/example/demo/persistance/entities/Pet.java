@@ -1,12 +1,12 @@
 package com.example.demo.persistance.entities;
 
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Pet implements Serializable {
+public class Pet {
 
     @Id
     @GeneratedValue
@@ -25,15 +25,17 @@ public class Pet implements Serializable {
     private String sex;
     @Column
     private String picture;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "ownerId")
     private Owner owner;
+
     @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PetCase.class)
     private List<PetCase> petCases = new ArrayList<>();
-    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Visit.class)
-    private List<Visit> visits= new ArrayList<>();
+    /*@OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Visit.class)
+    private List<Visit> visits= new ArrayList<>();*/
 
-    public Pet(){}
+    public Pet() {
+    }
 
     public Pet(String microship, String name, String specie, String race, String size, String sex, String picture) {
         this.microship = microship;
@@ -45,33 +47,12 @@ public class Pet implements Serializable {
         this.picture = picture;
     }
 
-    public Pet(int id, String microship, String name, String specie, String race, String size, String sex, String picture, Owner owner) {
-        this.id = id;
-        this.microship = microship;
-        this.name = name;
-        this.specie = specie;
-        this.race = race;
-        this.size = size;
-        this.sex = sex;
-        this.picture = picture;
-        this.owner = owner;
-    }
-
-    public boolean addCase(PetCase cas){
+    public void addCase(PetCase petCase){
         try{
-            petCases.add(cas);
-            return true;
+            petCases.add(petCase);
+            petCase.setPet(this);
         }catch (Exception e){
-            return false;
-        }
-    }
-
-    public boolean addVisit(Visit visit){
-        try{
-            visits.add(visit);
-            return true;
-        }catch (Exception e){
-            return false;
+            e.printStackTrace();
         }
     }
 
@@ -145,21 +126,5 @@ public class Pet implements Serializable {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
-    }
-
-    public List<PetCase> getCases() {
-        return petCases;
-    }
-
-    public void setCases(List<PetCase> petCases) {
-        this.petCases = petCases;
-    }
-
-    public List<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(List<Visit> visits) {
-        this.visits = visits;
     }
 }

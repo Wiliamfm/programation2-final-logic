@@ -1,5 +1,6 @@
 package com.example.demo.persistance.services;
 
+import com.example.demo.persistance.entities.Pet;
 import com.example.demo.persistance.entities.PetCase;
 
 import javax.persistence.EntityManager;
@@ -16,18 +17,37 @@ public class CaseService {
         entityManager= entityManagerFactory.createEntityManager();
     }
 
-    public boolean create(PetCase cas){
+    /**
+     * create new Case associated with the pet.
+     * @param petCase Case to be persisted.
+     * @param petId the id of the pet.
+     * @return true if created, false other way.
+     */
+    public boolean create(int petId, PetCase petCase){
         try{
-            entityManager.getTransaction().begin();
-            entityManager.persist(cas);
-            entityManager.getTransaction().commit();
-            return true;
+            Pet pet= entityManager.find(Pet.class, petId);
+            if(pet!=null){
+                entityManager.getTransaction().begin();
+                pet.addCase(petCase);
+                entityManager.persist(petCase);
+                entityManager.getTransaction().commit();
+                close();
+                return true;
+            }else{
+                return false;
+            }
         }catch (Exception e){
             System.out.println("Error while creating case: " +e.getMessage());
+            close();
             return false;
-        }finally {
-            entityManager.close();
-            entityManagerFactory.close();
         }
+    }
+
+    /**
+     * close entities managers.
+     */
+    public void close(){
+        entityManager.close();
+        entityManagerFactory.close();
     }
 }
