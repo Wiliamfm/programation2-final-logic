@@ -1,0 +1,628 @@
+{
+	"info": {
+		"_postman_id": "e296ba1f-f1e7-4247-be87-1f7c9501183d",
+		"name": "FinalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Owner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-username",
+							"value": "usernamepostman",
+							"type": "text"
+						},
+						{
+							"key": "form-password",
+							"value": "postman",
+							"type": "text"
+						},
+						{
+							"key": "form-email",
+							"value": "email@postman.com",
+							"type": "text"
+						},
+						{
+							"key": "form-name",
+							"value": "name",
+							"type": "text"
+						},
+						{
+							"key": "form-address",
+							"value": "address",
+							"type": "text"
+						},
+						{
+							"key": "form-neighborhood",
+							"value": "neighborhood",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Owner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Owner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-address",
+							"value": "address modif",
+							"type": "text"
+						},
+						{
+							"key": "form-neighborhood",
+							"value": "modify",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Veterinary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/veterinary/username3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"veterinary",
+						"username3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Veterinary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-username",
+							"value": "vet1p",
+							"type": "text"
+						},
+						{
+							"key": "form-password",
+							"value": "pas",
+							"type": "text"
+						},
+						{
+							"key": "form-email",
+							"value": "email@vet.com",
+							"type": "text"
+						},
+						{
+							"key": "form-name",
+							"value": "name",
+							"type": "text"
+						},
+						{
+							"key": "form-address",
+							"value": "add",
+							"type": "text"
+						},
+						{
+							"key": "form-neighborhood",
+							"value": "neigh",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/veterinary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"veterinary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Veterinary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-address",
+							"value": "add mod",
+							"type": "text"
+						},
+						{
+							"key": "form-neighborhood",
+							"value": "neigh mod",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/veterinary/username3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"veterinary",
+						"username3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Case",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-type",
+							"value": "stole",
+							"type": "text"
+						},
+						{
+							"key": "form-description",
+							"value": "descrioptionasdf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1/pets/35/case",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1",
+						"pets",
+						"35",
+						"case"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Official",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/official/username5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"official",
+						"username5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Official",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-username",
+							"value": "usernameoff23",
+							"type": "text"
+						},
+						{
+							"key": "form-password",
+							"value": "pas",
+							"type": "text"
+						},
+						{
+							"key": "form-email",
+							"value": "ema@asdf.com",
+							"type": "text"
+						},
+						{
+							"key": "form-name",
+							"value": "nameoofff",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/official",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"official"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1",
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Pet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-microship",
+							"value": "mica",
+							"type": "text"
+						},
+						{
+							"key": "form-name",
+							"value": "name",
+							"type": "text"
+						},
+						{
+							"key": "form-specie",
+							"value": "sep",
+							"type": "text"
+						},
+						{
+							"key": "form-race",
+							"value": "race\n",
+							"type": "text"
+						},
+						{
+							"key": "form-size",
+							"value": "sei",
+							"type": "text"
+						},
+						{
+							"key": "form-sex",
+							"value": "sex",
+							"type": "text"
+						},
+						{
+							"key": "form-picture",
+							"value": "pitcre",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1",
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Pet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-microship",
+							"value": "asdfasdf",
+							"type": "text"
+						},
+						{
+							"key": "form-name",
+							"value": "asdf",
+							"type": "text"
+						},
+						{
+							"key": "form-specie",
+							"value": "asdf",
+							"type": "text"
+						},
+						{
+							"key": "form-race",
+							"value": "asdf",
+							"type": "text"
+						},
+						{
+							"key": "form-size",
+							"value": "asdf",
+							"type": "text"
+						},
+						{
+							"key": "form-sex",
+							"value": "asdf",
+							"type": "text"
+						},
+						{
+							"key": "form-picture",
+							"value": "asdf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/owner/username1/pets/35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"owner",
+						"username1",
+						"pets",
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Pets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/userApp/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"userApp",
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Owners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/userApp/owners",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"userApp",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Cases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/userApp/cases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"userApp",
+						"cases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Visits",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/veterinary/username3/visits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"veterinary",
+						"username3",
+						"visits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Visit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "form-type",
+							"value": "vacunation",
+							"type": "text"
+						},
+						{
+							"key": "form-description",
+							"value": "asdf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demo-1.0-SNAPSHOT/4citizens/veterinary/username3/visits/35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo-1.0-SNAPSHOT",
+						"4citizens",
+						"veterinary",
+						"username3",
+						"visits",
+						"35"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
